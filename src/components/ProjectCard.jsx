@@ -1,3 +1,5 @@
+import { FaArrowUpRightFromSquare, FaGithub } from "react-icons/fa6";
+
 function ProjectCard({ project }) {
   return (
     <article className="project">
@@ -15,7 +17,9 @@ function ProjectCard({ project }) {
         rel="noopener noreferrer"
         aria-label={`Open ${project.name} on GitHub`}
       >
-        GitHub
+        <FaGithub className="inline-icon" aria-hidden="true" focusable="false" />
+        <span>GitHub</span>
+        <FaArrowUpRightFromSquare className="inline-icon" aria-hidden="true" focusable="false" />
       </a>
     </article>
   );

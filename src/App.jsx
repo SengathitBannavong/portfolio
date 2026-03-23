@@ -28,14 +28,28 @@ function App() {
 
       <main id="main-content" className="shell">
         <section className="hero" id="hero" aria-labelledby="hero-title">
-          <p className="kicker">Full Stack / Systems / Kernel</p>
-          <h1 id="hero-title">{site.name}</h1>
-          <p className="title-line">{site.roles}</p>
-          <p className="hero-bio">{site.bio}</p>
-          <div className="cta-row">
-            <a className="cta" href="#projects">
-              View Projects
-            </a>
+          <div className="hero-layout">
+            <div className="hero-copy">
+              <p className="kicker">Full Stack / Systems / Kernel</p>
+              <h1 id="hero-title">{site.name}</h1>
+              <p className="title-line">{site.roles}</p>
+              <p className="hero-bio">{site.bio}</p>
+              <div className="cta-row">
+                <a className="cta" href="#projects">
+                  View Projects
+                </a>
+              </div>
+            </div>
+
+            <figure className="hero-profile" aria-label="Profile photo">
+              <img
+                src="https://res.cloudinary.com/dskodfe9c/image/upload/v1768536235/bckamzijnf1gm2vzz4k7.png"
+                alt={`${site.name} profile photo`}
+                loading="eager"
+                decoding="async"
+                fetchPriority="high"
+              />
+            </figure>
           </div>
         </section>
 
