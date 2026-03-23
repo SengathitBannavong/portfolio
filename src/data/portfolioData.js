@@ -1,7 +1,7 @@
 export const site = {
   name: "Seng Athit Bannavong",
   roles: "Computer Science Student, Full Stack Developer, and Systems Programmer.",
-  bio: "Computer Science student at Hanoi University of Science and Technology with hands-on experience in systems programming and full-stack web development. I build practical software from C-based concurrency tools and OCR pipelines to React and Node.js applications.",
+  bio: "Computer Science student at Hanoi University of Science and Technology with hands-on experience in systems programming and full-stack web development.",
   footer: "Built with React, semantic HTML, and quiet interactions.",
 };
 
