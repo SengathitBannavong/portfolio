@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite-react-ssg build",
+    "build:vps": "BASE_PATH=/static/portfolio/ vite-react-ssg build",
     "preview": "vite preview"
   },
   "dependencies": {

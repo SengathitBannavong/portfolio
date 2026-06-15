@@ -2,8 +2,10 @@ import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
 
 export default defineConfig({
-  // Site is deployed under this sub-path on the VPS (nginx), so all
-  // asset URLs (JS/CSS) must be prefixed with it. Root "/" 404s otherwise.
-  base: "/static/portfolio/",
+  // Base path is environment-driven:
+  //   - Firebase Hosting serves from root, so default to "/".
+  //   - VPS (nginx) serves under a sub-path; `npm run build:vps` sets
+  //     BASE_PATH=/static/portfolio/ so JS/CSS resolve there (root 404s).
+  base: process.env.BASE_PATH || "/",
   plugins: [react()],
 });
