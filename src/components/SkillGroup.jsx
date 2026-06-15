@@ -50,9 +50,11 @@ function SkillGroup({ group }) {
   const headingId = `skills-${group.title.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`;
 
   return (
-    <article className="skill-group" aria-labelledby={headingId}>
-      <h3 id={headingId}>{group.title}</h3>
-      <ul className="skill-items">
+    <div className="skill-row">
+      <h3 className="skill-label" id={headingId}>
+        {group.title}
+      </h3>
+      <ul className="skill-chips" aria-labelledby={headingId}>
         {group.skills.map((skill) => {
           const normalizedSkill =
             typeof skill === "string"
@@ -78,19 +80,17 @@ function SkillGroup({ group }) {
 
           return (
             <li
-              className="skill-logo-item"
+              className="chip"
               key={`${group.title}-${skillName}`}
-              title={skillName}
-              aria-label={skillName}
               style={customColorStyle}
             >
-              <SkillLogo className="skill-logo" aria-hidden="true" focusable="false" />
-              <span className="sr-only">{skillName}</span>
+              <SkillLogo className="chip-logo" aria-hidden="true" focusable="false" />
+              <span>{skillName}</span>
             </li>
           );
         })}
       </ul>
-    </article>
+    </div>
   );
 }
 

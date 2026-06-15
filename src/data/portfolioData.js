@@ -2,6 +2,14 @@ export const site = {
   name: "Seng Athit Bannavong",
   roles: "Computer Science Student, Full Stack Developer, and Systems Programmer.",
   bio: "Computer Science student at Hanoi University of Science and Technology with hands-on experience in systems programming and full-stack web development.",
+  githubUrl: "https://github.com/SengathitBannavong",
+  kicker: "Full Stack · Systems · Kernel",
+  meta: [
+    { label: "Location", value: "Hanoi, Vietnam" },
+    { label: "Studying", value: "CS · HUST" },
+    { label: "Focus", value: "Systems + Full-stack" },
+    { label: "Status", value: "Open to work", live: true },
+  ],
   footer: "Built with React, semantic HTML, and quiet interactions.",
 };
 

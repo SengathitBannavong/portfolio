@@ -1,27 +1,34 @@
 import { FaArrowUpRightFromSquare, FaGithub } from "react-icons/fa6";
 
-function ProjectCard({ project }) {
+function ProjectCard({ project, index }) {
   return (
-    <article className="project">
-      <h3>{project.name}</h3>
-      <ul className="tech-list" aria-label={`Tech stack for ${project.name}`}>
-        {project.stack.map((item) => (
-          <li key={`${project.name}-${item}`}>{item}</li>
-        ))}
-      </ul>
-      <p>{project.description}</p>
-      <a
-        className="project-link"
-        href={project.githubUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label={`Open ${project.name} on GitHub`}
-      >
-        <FaGithub className="inline-icon" aria-hidden="true" focusable="false" />
-        <span>GitHub</span>
-        <FaArrowUpRightFromSquare className="inline-icon" aria-hidden="true" focusable="false" />
-      </a>
-    </article>
+    <li className="row">
+      <span className="row-num" aria-hidden="true">
+        {index}
+      </span>
+      <div className="row-body">
+        <div className="row-head">
+          <h3>{project.name}</h3>
+          <a
+            className="row-link"
+            href={project.githubUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`Open ${project.name} on GitHub`}
+          >
+            <FaGithub className="inline-icon" aria-hidden="true" focusable="false" />
+            <span>Source</span>
+            <FaArrowUpRightFromSquare className="inline-icon" aria-hidden="true" focusable="false" />
+          </a>
+        </div>
+        <p className="row-desc">{project.description}</p>
+        <ul className="tags" aria-label={`Tech stack for ${project.name}`}>
+          {project.stack.map((item) => (
+            <li key={`${project.name}-${item}`}>{item}</li>
+          ))}
+        </ul>
+      </div>
+    </li>
   );
 }
 
