@@ -47,7 +47,7 @@ function App() {
                 alt={`${site.name} profile photo`}
                 loading="eager"
                 decoding="async"
-                fetchPriority="high"
+                fetchpriority="high"
               />
             </figure>
           </div>
