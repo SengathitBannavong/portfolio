@@ -8,7 +8,10 @@ function ProjectCard({ project, index }) {
       </span>
       <div className="row-body">
         <div className="row-head">
-          <h3>{project.name}</h3>
+          <div className="row-title">
+            <h3>{project.name}</h3>
+            {project.tag ? <span className="row-tag">{project.tag}</span> : null}
+          </div>
           <a
             className="row-link"
             href={project.githubUrl}
@@ -22,6 +25,7 @@ function ProjectCard({ project, index }) {
           </a>
         </div>
         <p className="row-desc">{project.description}</p>
+        {project.meta ? <p className="row-meta">{project.meta}</p> : null}
         <ul className="tags" aria-label={`Tech stack for ${project.name}`}>
           {project.stack.map((item) => (
             <li key={`${project.name}-${item}`}>{item}</li>

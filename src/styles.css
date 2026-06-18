@@ -407,10 +407,30 @@ h1 {
   flex-wrap: wrap;
 }
 
+.row-title {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
 .row h3 {
   font-size: clamp(1.1rem, 1.8vw, 1.4rem);
   font-weight: 600;
   letter-spacing: -0.01em;
+}
+
+.row-tag {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--accent-text);
+  border: 1px solid color-mix(in oklab, var(--accent) 32%, var(--line));
+  background: color-mix(in oklab, var(--accent) 9%, transparent);
+  border-radius: 3px;
+  padding: 0.16rem 0.45rem;
+  white-space: nowrap;
 }
 
 .row-link {
@@ -430,19 +450,32 @@ h1 {
 }
 
 .row-desc {
-  margin: 0.7rem 0 0;
+  margin: 0.65rem 0 0;
   color: var(--muted);
-  max-width: 70ch;
+  max-width: 68ch;
   font-size: 0.96rem;
 }
 
+.row-meta {
+  margin: 0.85rem 0 0;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+
 .tags {
-  margin: var(--space-3) 0 0;
+  margin: 0.85rem 0 0;
   padding: 0;
   list-style: none;
   display: flex;
   flex-wrap: wrap;
   gap: 0.45rem;
+}
+
+.row-meta + .tags {
+  margin-top: 0.6rem;
 }
 
 .tags li {

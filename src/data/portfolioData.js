@@ -15,39 +15,71 @@ export const site = {
 
 export const projects = [
   {
-    name: "Text Classification using TF-IDF and Naive Bayes",
-    stack: ["C", "NLP", "Multithreading"],
+    name: "Web E-Commerce",
+    tag: "Web",
+    stack: ["React 19", "Vite", "Tailwind CSS v4", "Express", "Docker"],
     description:
-      "Built a complete NLP text classifier from scratch in C with no external ML libraries, including TF-IDF, Naive Bayes, sparse matrix handling, and multithreaded preprocessing.",
-    githubUrl: "https://github.com/SengathitBannavong/NLP_TFIDF_NaiveBayes_From_C",
+      "Full-stack e-commerce web app with a React 19 + Vite + Tailwind CSS v4 frontend, an Express backend, and Dockerized deployment.",
+    githubUrl: "https://github.com/SengathitBannavong/Web-E-commerce",
   },
   {
-    name: "Thread Pool + Priority Task Scheduler",
-    stack: ["C", "POSIX Threads", "TSAN"],
+    name: "Hospital App",
+    tag: "Mobile",
+    stack: ["Flutter", "Dart", "Riverpod", "GoRouter"],
     description:
-      "Implemented a thread-safe priority queue and worker pool with graceful shutdown, blocking and non-blocking operations, and clean concurrency tests integrated with ThreadSanitizer.",
+      "Cross-platform hospital app built with Flutter and Riverpod, with GoRouter navigation. Released for iOS via AltStore sideloading on Windows, built and signed through GitHub Actions.",
+    githubUrl: "https://github.com/SengathitBannavong/hospital-app",
+  },
+  {
+    name: "Thread Pooling",
+    tag: "Systems",
+    meta: "HUST · Project 2",
+    stack: ["C11", "POSIX Threads", "ncurses"],
+    description:
+      "Priority-scheduled thread pool in C11 with task aging, pause/resume, graceful shutdown, and an ncurses monitor. Fixed a Dekker race with seq_cst ordering; HTTP benchmark improved p99 latency 22–28% with peak threads of 17 vs 200+ in a naive baseline.",
     githubUrl: "https://github.com/SengathitBannavong/thread_pooling",
   },
   {
-    name: "Transcript Viewer",
-    stack: ["C", "Raylib", "SQLite3"],
+    name: "Jtodo",
+    tag: "Desktop",
+    meta: "HUST · Project 1",
+    stack: ["C#", "WPF", ".NET"],
     description:
-      "Desktop transcript viewer built in C with Clay UI, charts, command palette, and 49 unit tests covering GPA, credit, and graduation logic across Linux and Windows.",
-    githubUrl: "https://github.com/SengathitBannavong/Transcript-Viewer",
+      "Desktop to-do application built with C#, WPF, and .NET following the MVVM architecture pattern.",
+    githubUrl: "https://github.com/SengathitBannavong/Jtodo",
   },
   {
-    name: "Vietnamese Text Recognition System",
-    stack: ["Python", "CRNN", "Flask"],
+    name: "Website Order in Restaurant",
+    tag: "Web",
+    stack: ["React", "Node.js", "Express", "MongoDB"],
     description:
-      "Built an end-to-end OCR pipeline for Vietnamese text using CRNN with synthetic data generation, LMDB preprocessing, Colab GPU training, and Flask inference deployment.",
+      "Full-stack restaurant ordering web app with a React frontend and a Node.js, Express, and MongoDB backend.",
+    githubUrl: "https://github.com/SengathitBannavong/Website_Order_in_Restaurant",
+  },
+  {
+    name: "Recognized Vietnam Sentence",
+    tag: "ML/NLP",
+    stack: ["Python", "PyTorch", "CRAFT", "CRNN", "Flask"],
+    description:
+      "End-to-end OCR pipeline for Vietnamese text recognition combining CRAFT detection and a CRNN recognizer in PyTorch, served through Flask.",
     githubUrl: "https://github.com/SengathitBannavong/Recognized-Vietnam-Sentence",
   },
   {
-    name: "Web E-Commerce Platform",
-    stack: ["React", "Express", "PostgreSQL"],
+    name: "NLP TF-IDF Naive Bayes",
+    tag: "ML/NLP",
+    stack: ["C11", "CMake"],
     description:
-      "Developed a full-stack bookstore platform with React frontend, Express backend, PostgreSQL and Redis, Dockerized deployment, and CI/CD in a team of three.",
-    githubUrl: "https://github.com/SengathitBannavong/Web-E-commerce",
+      "Text classifier written from scratch in pure C11 with no external libraries — custom sparse matrix, string interning, and TF-IDF + Naive Bayes, verified leak-free with Valgrind.",
+    githubUrl: "https://github.com/SengathitBannavong/NLP_TFIDF_NaiveBayes_From_C",
+  },
+  {
+    name: "A Better World",
+    tag: "Game",
+    meta: "HUST · OOP · Group project",
+    stack: ["Java", "AWT/Swing"],
+    description:
+      "Full 2D RPG built in Java with AWT/Swing and no game engine — custom rendering, AI, collision detection, story state, and a class hierarchy designed from scratch.",
+    githubUrl: "https://github.com/SengathitBannavong/A-Better-World",
   },
 ];
 
