@@ -15,6 +15,15 @@ export const site = {
 
 export const projects = [
   {
+    name: "Thread Pooling",
+    tag: "Systems",
+    meta: "HUST · Project 2",
+    stack: ["C11", "POSIX Threads", "ncurses"],
+    description:
+      "Priority-scheduled thread pool in C11 with task aging, pause/resume, graceful shutdown, and an ncurses monitor. Fixed a Dekker race with seq_cst ordering; HTTP benchmark improved p99 latency 22–28% with peak threads of 17 vs 200+ in a naive baseline.",
+    githubUrl: "https://github.com/SengathitBannavong/thread_pooling",
+  },
+  {
     name: "Web E-Commerce",
     tag: "Web",
     stack: ["React 19", "Vite", "Tailwind CSS v4", "Express", "Docker"],
@@ -29,15 +38,6 @@ export const projects = [
     description:
       "Cross-platform hospital app built with Flutter and Riverpod, with GoRouter navigation. Released for iOS via AltStore sideloading on Windows, built and signed through GitHub Actions.",
     githubUrl: "https://github.com/SengathitBannavong/hospital-app",
-  },
-  {
-    name: "Thread Pooling",
-    tag: "Systems",
-    meta: "HUST · Project 2",
-    stack: ["C11", "POSIX Threads", "ncurses"],
-    description:
-      "Priority-scheduled thread pool in C11 with task aging, pause/resume, graceful shutdown, and an ncurses monitor. Fixed a Dekker race with seq_cst ordering; HTTP benchmark improved p99 latency 22–28% with peak threads of 17 vs 200+ in a naive baseline.",
-    githubUrl: "https://github.com/SengathitBannavong/thread_pooling",
   },
   {
     name: "Jtodo",
@@ -138,11 +138,6 @@ export const contacts = [
     label: "Email",
     value: "teamblackextra@gmail.com",
     href: "mailto:teamblackextra@gmail.com",
-  },
-  {
-    label: "Phone",
-    value: "+84 857 472 506",
-    href: "tel:+84857472506",
   },
   {
     label: "GitHub",
