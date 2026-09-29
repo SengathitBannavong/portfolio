@@ -8,7 +8,7 @@ export const site = {
     { label: "Location", value: "Hanoi, Vietnam" },
     { label: "Studying", value: "CS · HUST" },
     { label: "Focus", value: "Systems + Full-stack" },
-    { label: "Status", value: "Open to work", live: true },
+    { label: "Status", value: "Open to work", live: false },
   ],
   footer: "Built with React, semantic HTML, and quiet interactions.",
 };
