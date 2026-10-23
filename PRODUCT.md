@@ -9,9 +9,11 @@ Minimal, trustworthy, pragmatic.
 The interface should feel precise, calm, and engineering-first.
 
 ### Aesthetic Direction
-Minimal and clean portfolio with a near-black base and one restrained accent color.
-Strong whitespace, semantic structure, and subtle interactions only.
-No gradients, no decorative illustrations, and no visual noise.
+Hand-drawn notebook look from the Sketch theme (`src/sketch.css`, copied from `~/design/sketch-theme/`; its `DESIGN.md` is the reference).
+Dotted paper, wobbly 2px ink borders, small tilts, Itim/Mali handwriting with monospace code. Light and dark themes.
+No emoji: icons are SVG (`react-icons`) and hand-drawn SVG strokes (`src/components/Sketch.jsx`).
+Marker colors keep one meaning each (green = good/live, red = scribble underline); tech logos stay in ink, not brand colors.
+No gradients, no box-shadows.
 
 ### Design Principles
 - Prioritize legibility and information hierarchy over decoration.

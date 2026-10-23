@@ -36,7 +36,7 @@ function ContactItem({ item }) {
   const external = item.href.startsWith("http");
 
   return (
-    <li>
+    <li className="sk-box contact">
       <a
         className="contact-link"
         href={item.href}

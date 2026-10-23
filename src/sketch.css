@@ -1,0 +1,344 @@
+/* Sketch theme: hand-drawn, Excalidraw-like. Thai-ready.
+ * Usage:
+ *   <link href="https://fonts.googleapis.com/css2?family=Itim&family=Mali:wght@400;600&display=swap" rel="stylesheet">
+ *   <link rel="stylesheet" href="sketch.css">
+ * Theme toggle: set data-theme="light" | "dark" on <html>; default follows the OS.
+ */
+
+/* ---------- tokens ---------- */
+:root {
+  --sk-bg: #fdfcf8;
+  --sk-dot: #d9d6cc;
+  --sk-ink: #1e1e1e;
+  --sk-muted: #5c5a55;
+  --sk-card: #fffefb;
+  --sk-code-bg: #f1efe8;
+
+  --sk-red: #e03131;    --sk-red-bg: #ffe3e3;
+  --sk-orange: #e8590c; --sk-orange-bg: #ffe8cc;
+  --sk-yellow: #c48a00; --sk-yellow-bg: #fff3bf;
+  --sk-green: #2f9e44;  --sk-green-bg: #d3f9d8;
+  --sk-blue: #1971c2;   --sk-blue-bg: #d0ebff;
+
+  --sk-font-body: "Mali", "Itim", "Comic Sans MS", cursive;
+  --sk-font-head: "Itim", "Mali", cursive;
+  --sk-font-mono: ui-monospace, "Cascadia Code", Menlo, Consolas, monospace;
+
+  /* the wobble: two mirrored irregular radii */
+  --sk-wobble-a: 255px 15px 225px 15px / 15px 225px 15px 255px;
+  --sk-wobble-b: 15px 225px 15px 255px / 255px 15px 225px 15px;
+  --sk-stroke: 2px;
+  --sk-tilt: 0.35deg;
+  --sk-ease: cubic-bezier(0.22, 1, 0.36, 1); /* ease-out-quint */
+
+  /* layout */
+  --sk-measure: 72ch;     /* text column */
+  --sk-wide: 1200px;      /* .sk-wide */
+  --sk-gutter: 16px;      /* min space to the screen edge */
+  --sk-toc-w: 220px;      /* left column, when the page has .sk-toc */
+  --sk-margin-w: 240px;   /* right column, when the page has .sk-margin */
+  --sk-col-gap: 40px;
+  --sk-flow: 1em;         /* default space between page blocks */
+}
+
+/* dark tokens: once for the OS preference, once for the manual toggle */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --sk-bg: #121212; --sk-dot: #2c2c2c; --sk-ink: #e8e6e1; --sk-muted: #a8a59e;
+    --sk-card: #1b1b1b; --sk-code-bg: #262522;
+    --sk-red: #ff8787;    --sk-red-bg: #3b1a1a;
+    --sk-orange: #ffa94d; --sk-orange-bg: #3a2614;
+    --sk-yellow: #ffd43b; --sk-yellow-bg: #35300f;
+    --sk-green: #69db7c;  --sk-green-bg: #16301c;
+    --sk-blue: #74c0fc;   --sk-blue-bg: #132a3f;
+  }
+}
+:root[data-theme="dark"] {
+  --sk-bg: #121212; --sk-dot: #2c2c2c; --sk-ink: #e8e6e1; --sk-muted: #a8a59e;
+  --sk-card: #1b1b1b; --sk-code-bg: #262522;
+  --sk-red: #ff8787;    --sk-red-bg: #3b1a1a;
+  --sk-orange: #ffa94d; --sk-orange-bg: #3a2614;
+  --sk-yellow: #ffd43b; --sk-yellow-bg: #35300f;
+  --sk-green: #69db7c;  --sk-green-bg: #16301c;
+  --sk-blue: #74c0fc;   --sk-blue-bg: #132a3f;
+}
+
+/* ---------- base ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background-color: var(--sk-bg);
+  background-image: radial-gradient(var(--sk-dot) 1.2px, transparent 1.2px);
+  background-size: 22px 22px;
+  color: var(--sk-ink);
+  font-family: var(--sk-font-body);
+  font-size: 17px;
+  line-height: 1.65;
+}
+h1, h2, h3 { font-family: var(--sk-font-head); font-weight: 400; line-height: 1.3; }
+h1 { font-size: clamp(30px, 6vw, 44px); margin: 0 0 6px; }
+h2 { font-size: 28px; margin: 48px 0 16px; }
+h3 { font-size: 22px; margin: 0 0 6px; }
+
+.sk-muted { color: var(--sk-muted); }
+.sk-small { font-size: 15px; }
+
+/* ---------- box: the core primitive ---------- */
+.sk-box {
+  border: var(--sk-stroke) solid var(--sk-ink);
+  border-radius: var(--sk-wobble-a);
+  background: var(--sk-card);
+  padding: 18px 22px;
+}
+.sk-box--alt { border-radius: var(--sk-wobble-b); }
+.sk-tilt-l { transform: rotate(calc(var(--sk-tilt) * -1)); }
+.sk-tilt-r { transform: rotate(var(--sk-tilt)); }
+/* stack: alternates wobble + tilt automatically */
+.sk-stack > * { margin: 0 0 22px; }
+.sk-stack > :nth-child(odd)  { transform: rotate(calc(var(--sk-tilt) * -1)); }
+.sk-stack > :nth-child(even) { transform: rotate(var(--sk-tilt)); border-radius: var(--sk-wobble-b); }
+
+/* color variants: set border + badge tint */
+.sk-red    { --sk-accent: var(--sk-red);    --sk-accent-bg: var(--sk-red-bg); }
+.sk-orange { --sk-accent: var(--sk-orange); --sk-accent-bg: var(--sk-orange-bg); }
+.sk-yellow { --sk-accent: var(--sk-yellow); --sk-accent-bg: var(--sk-yellow-bg); }
+.sk-green  { --sk-accent: var(--sk-green);  --sk-accent-bg: var(--sk-green-bg); }
+.sk-blue   { --sk-accent: var(--sk-blue);   --sk-accent-bg: var(--sk-blue-bg); }
+.sk-box.sk-red, .sk-box.sk-orange, .sk-box.sk-yellow,
+.sk-box.sk-green, .sk-box.sk-blue { border-color: var(--sk-accent); }
+.sk-box.sk-note { background: var(--sk-blue-bg); border-color: var(--sk-blue); }
+
+/* ---------- badge: wobbly circle number ---------- */
+.sk-badge {
+  display: inline-grid; place-items: center;
+  min-width: 34px; height: 34px; padding: 0 6px;
+  border: var(--sk-stroke) solid currentColor;
+  border-radius: 50% 45% 55% 48% / 52% 48% 50% 46%;
+  color: var(--sk-accent, var(--sk-ink));
+  background: var(--sk-accent-bg, transparent);
+  font-family: var(--sk-font-head); font-size: 18px; flex-shrink: 0;
+}
+.sk-title { display: flex; gap: 12px; align-items: baseline; flex-wrap: wrap; }
+
+/* ---------- tag / legend pill ---------- */
+.sk-tag {
+  display: inline-block; padding: 2px 12px;
+  border: var(--sk-stroke) solid var(--sk-accent, var(--sk-ink));
+  color: var(--sk-accent, var(--sk-ink));
+  border-radius: 20px 8px 18px 10px; font-size: 15px;
+}
+.sk-row, .sk-tags { display: flex; gap: 10px 14px; flex-wrap: wrap; align-items: center; }
+
+/* ---------- callout (fix / tip) ---------- */
+.sk-callout {
+  margin-top: 10px; padding: 8px 14px;
+  border-radius: 10px 4px 12px 5px;
+  background: var(--sk-green-bg);
+}
+.sk-callout > b:first-child { color: var(--sk-green); font-weight: 600; }
+
+/* ---------- button ---------- */
+.sk-btn {
+  font: inherit; font-size: 15px; color: var(--sk-ink); cursor: pointer;
+  padding: 4px 14px; background: var(--sk-card);
+  border: var(--sk-stroke) solid var(--sk-ink); border-radius: var(--sk-wobble-a);
+  transition: transform .2s var(--sk-ease);
+}
+.sk-btn:hover { transform: rotate(-1deg) translateY(-1px); }
+.sk-btn:focus-visible { outline: 3px solid var(--sk-blue); outline-offset: 3px; }
+
+/* ---------- code ---------- */
+code {
+  font-family: var(--sk-font-mono); font-size: 0.86em;
+  background: var(--sk-code-bg); padding: 1px 6px;
+  border-radius: 4px 7px 5px 6px; word-break: break-word;
+}
+pre {
+  margin: 10px 0 0; padding: 12px 14px;
+  background: var(--sk-code-bg);
+  border: 1.5px dashed var(--sk-muted);
+  border-radius: 8px 14px 10px 12px;
+  overflow-x: auto; font-size: 14px; line-height: 1.5;
+}
+pre code { background: none; padding: 0; font-size: inherit; }
+
+/* ---------- table ---------- */
+.sk-table-wrap { overflow-x: auto; }
+.sk-table { border-collapse: collapse; width: 100%; min-width: 420px; font-size: 16px; }
+.sk-table th, .sk-table td { padding: 6px 10px; text-align: left; border-bottom: 1.5px dashed var(--sk-dot); }
+.sk-table th { font-family: var(--sk-font-head); font-weight: 400; color: var(--sk-muted); }
+.sk-table td { font-variant-numeric: tabular-nums; }
+.sk-table tr.sk-good td { background: var(--sk-green-bg); }
+.sk-table tr.sk-warn td { background: var(--sk-yellow-bg); }
+
+/* ---------- scribble underline (pair with SVG, see example.html) ---------- */
+.sk-underline { display: inline-block; position: relative; }
+.sk-underline > svg {
+  position: absolute; left: -4px; bottom: -10px;
+  width: calc(100% + 8px); height: 14px; pointer-events: none;
+}
+
+/* ---------- fixed theme toggle ---------- */
+.sk-theme-btn { position: fixed; top: 14px; right: 14px; z-index: 5; }
+
+/* ==========================================================================
+ * LAYOUT
+ * The page is a grid. Text sits in a ~72ch column; .sk-wide / .sk-full break
+ * out wider. Side columns appear only when the page has content for them:
+ *   <nav class="sk-toc">     -> sticky left column (wide screens)
+ *   <aside class="sk-margin"> -> note in the right margin, next to the block before it
+ * Wrap a part of the page in <section class="sk-section"> to keep all of this inside it.
+ * ========================================================================== */
+.sk-page {
+  --sk-side: calc((var(--sk-wide) - var(--sk-measure)) / 2);
+  display: grid;
+  grid-template-columns:
+    [full-start] minmax(var(--sk-gutter), 1fr)
+    [wide-start] minmax(0, var(--sk-side))
+    [content-start] min(var(--sk-measure), 100% - 2 * var(--sk-gutter)) [content-end]
+    minmax(0, var(--sk-side)) [wide-end]
+    minmax(var(--sk-gutter), 1fr) [full-end];
+  align-content: start;
+  padding: 40px 0 80px;
+}
+:is(.sk-page, .sk-section) > * { grid-column: content; min-width: 0; }
+:is(.sk-page, .sk-section) > .sk-wide { grid-column: wide; }
+:is(.sk-page, .sk-section) > .sk-full { grid-column: full; }
+:is(.sk-page, .sk-section) > .sk-underline { justify-self: start; }
+
+/* <section class="sk-section"> passes the page columns to its children (subgrid),
+   so .sk-wide / .sk-full / .sk-margin work inside it too */
+.sk-page > .sk-section { grid-column: full; display: grid; grid-template-columns: subgrid; align-content: start; }
+
+/* grid items don't collapse margins, so page spacing lives here */
+:where(.sk-page, .sk-section) > * { margin-block: 0; }
+:where(.sk-page, .sk-section) > * + * { margin-top: var(--sk-flow); }
+:is(.sk-page, .sk-section) > :where(.sk-box, .sk-grid, .sk-stack, .sk-steps, .sk-table-wrap, pre) + *,
+:is(.sk-page, .sk-section) > * + :where(.sk-box, .sk-grid, .sk-stack, .sk-steps, .sk-table-wrap, pre) { margin-top: 22px; }
+:is(.sk-page, .sk-section) > h2 { margin-top: 48px; }
+:is(.sk-page, .sk-section) > :is(h2, h3) + * { margin-top: 12px; }
+.sk-stack > :last-child { margin-bottom: 0; }
+
+/* ---------- toc: a box on top, a sticky left column when there is room ---------- */
+.sk-toc { font-size: 15px; }
+.sk-toc ul, .sk-toc ol { margin: 6px 0 0; padding-left: 18px; }
+.sk-toc a { color: inherit; }
+.sk-page > .sk-toc {
+  border: 1.5px dashed var(--sk-muted);
+  border-radius: var(--sk-wobble-b);
+  padding: 12px 18px;
+}
+@media (min-width: 1100px) {
+  .sk-page:has(> .sk-toc) {
+    grid-template-columns:
+      [full-start] minmax(var(--sk-gutter), 1fr)
+      [toc-start] var(--sk-toc-w) [toc-end]
+      var(--sk-col-gap)
+      [content-start wide-start] min(var(--sk-measure), 100% - 2 * var(--sk-gutter)) [content-end]
+      minmax(0, calc(var(--sk-wide) - var(--sk-measure))) [wide-end]
+      minmax(var(--sk-gutter), 1fr) [full-end];
+  }
+  .sk-page > .sk-toc {
+    grid-column: toc;
+    grid-row: 1 / span 999; /* ponytail: "all rows"; raise if a page ever has 999+ blocks */
+    align-self: start;
+    position: sticky; top: 24px;
+    max-height: calc(100vh - 48px); overflow-y: auto;
+    margin: 0; border: 0; padding: 4px;
+  }
+  .sk-page:has(> .sk-toc) > :is(.sk-full, .sk-section),
+  .sk-page:has(> .sk-toc) > .sk-section > .sk-full { grid-column: content-start / full-end; }
+}
+
+/* ---------- margin note: put it right after the block it explains ---------- */
+.sk-margin { font-size: 15px; color: var(--sk-muted); }
+:is(.sk-page, .sk-section) > .sk-margin {
+  padding: 8px 14px;
+  border-radius: 10px 4px 12px 5px;
+  background: var(--sk-blue-bg);
+}
+@media (min-width: 1340px) {
+  :is(.sk-page, .sk-section) > .sk-margin {
+    grid-column: content-end / full-end;  /* same row as the block before it */
+    align-self: start; justify-self: start;
+    width: var(--sk-margin-w);
+    margin: 0 0 0 var(--sk-col-gap);
+    padding: 0; background: none;
+  }
+  /* no room beside a wide block: stay under it */
+  :is(.sk-page, .sk-section) > :is(.sk-wide, .sk-full) + .sk-margin {
+    grid-column: content; width: auto;
+    margin: var(--sk-flow) 0 0;
+    padding: 8px 14px; background: var(--sk-blue-bg);
+  }
+}
+
+/* ---------- card grid: as many columns as fit ---------- */
+.sk-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(var(--sk-grid-min, 220px), 100%), 1fr));
+  gap: 22px;
+}
+.sk-grid > * { margin: 0; min-width: 0; }
+.sk-grid > :nth-child(odd)  { transform: rotate(calc(var(--sk-tilt) * -1)); }
+.sk-grid > :nth-child(even) { transform: rotate(var(--sk-tilt)); border-radius: var(--sk-wobble-b); }
+
+/* ---------- steps: vertical, or a row when 5 or fewer fit ---------- */
+.sk-steps {
+  container-type: inline-size;
+  display: flex; flex-wrap: wrap; gap: 30px;
+  list-style: none; margin-inline: 0; padding: 0;
+  counter-reset: sk-step;
+}
+.sk-steps > li {
+  flex: 1 1 100%;
+  position: relative;
+  counter-increment: sk-step;
+  padding: 10px 14px;
+  background: var(--sk-card);
+  border: var(--sk-stroke) solid var(--sk-accent, var(--sk-ink));
+  border-radius: var(--sk-wobble-a);
+}
+.sk-steps > li:nth-child(even) { border-radius: var(--sk-wobble-b); }
+.sk-steps > li::before {
+  content: counter(sk-step) ".";
+  font-family: var(--sk-font-head); color: var(--sk-accent, var(--sk-muted));
+  margin-right: 8px;
+}
+.sk-steps > li:not(:last-child)::after {
+  content: ""; position: absolute;
+  width: 24px; height: 26px;
+  left: 50%; top: 100%; translate: -50% 2px;
+  background: var(--sk-muted);
+  -webkit-mask: var(--sk-arrow-down) center / contain no-repeat;
+          mask: var(--sk-arrow-down) center / contain no-repeat;
+}
+.sk-steps {
+  --sk-arrow-down: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 26' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 2C8 9 15 15 12 23'/%3E%3Cpath d='M6 17l6 7 6-7'/%3E%3C/svg%3E");
+}
+@container (min-width: 620px) {
+  .sk-steps:not(:has(> li:nth-child(6))) > li { flex: 1 1 0; }
+  .sk-steps:not(:has(> li:nth-child(6))) > li:not(:last-child)::after {
+    left: 100%; top: 50%; translate: 3px -50%; rotate: -90deg;
+  }
+}
+
+/* ---------- key / value list ---------- */
+.sk-kv { display: grid; grid-template-columns: fit-content(40%) 1fr; gap: 4px 16px; margin: 0; }
+.sk-kv > dt { font-weight: 600; }
+.sk-kv > dd { margin: 0; }
+
+/* ---------- responsive + motion ---------- */
+@media (max-width: 560px) {
+  body { font-size: 16px; }
+  .sk-tilt-l, .sk-tilt-r, .sk-stack > *, .sk-grid > * { transform: none !important; }
+  .sk-page { padding-top: 64px; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .sk-stack > *, .sk-grid > * { transition: transform .2s var(--sk-ease); }
+  .sk-stack > *:hover, .sk-grid > *:hover { transform: rotate(0deg) translateY(-2px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sk-btn { transition: none; }
+}
